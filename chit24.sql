@@ -4,11 +4,13 @@ UPDATE Company SET city = 'Pune' WHERE cname = 'ABC';
 
 //ii. Give all managers of Mbank a 10% raise. If salary is >20,000, give only 3% raise.
 
-UPDATE Manager SET salary = salary * 1.1
-WHERE mgrname = 'Mbank';
+UPDATE Emp
+SET sal = CASE
+  WHEN sal > 20000 THEN sal * 1.03
+  ELSE sal * 1.10
+END
+WHERE ename IN (SELECT mgrname FROM Manager);
 
-UPDATE Manager SET salary = salary * 1.03
-WHERE mgrname = 'Mbank' AND salary > 20000;
 
 //iii. Find out the names of all the employees who works in ‘Bosch’ company in city Pune
 
